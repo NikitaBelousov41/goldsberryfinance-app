@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue May 26 16:22:11 2026
+
+@author: nikita
+"""
+
+streamlit
+pandas
+numpy
+matplotlib
+plotly
+reportlab
+python-dateutil
