@@ -276,6 +276,7 @@ issuer_options = [
     "Wells Fargo",
     "Synchrony",
     "Apple Card",
+    "Navy Federal",
     "Other"
 ]
 
