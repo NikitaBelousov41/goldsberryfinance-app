@@ -621,7 +621,7 @@ if st.button("Analyze Debt Plan", use_container_width=True):
         risk_display["apr"] = (risk_display["apr"] * 100).apply(percent)
         risk_display["utilization"] = (risk_display["utilization"] * 100).apply(percent)
 
-        styled_risk = risk_display.style.applymap(
+        styled_risk = risk_display.style.map(
             style_risk,
             subset=["apr_risk"]
         )
