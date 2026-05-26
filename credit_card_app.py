@@ -24,7 +24,10 @@ st.set_page_config(
     layout="wide"
 )
 
-
+with st.sidebar:
+    st.caption(
+        "Educational tool only. Not financial, legal, or credit advice."
+    )
 # ----------------------------
 # HELPER FUNCTIONS
 # ----------------------------
