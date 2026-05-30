@@ -15,9 +15,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
 
-# ----------------------------
-# PAGE CONFIG
-# ----------------------------
+# PAGE CONFIGURATIONS
 
 st.set_page_config(
     page_title="GoldsberryFinance",
@@ -28,9 +26,8 @@ with st.sidebar:
     st.caption(
         "Educational tool only. Not financial, legal, or credit advice."
     )
-# ----------------------------
+
 # HELPER FUNCTIONS
-# ----------------------------
 
 def money(x):
     if x is None or pd.isna(x):
@@ -164,9 +161,8 @@ def create_pdf_report(results, notes, first_month, total_balance, monthly_budget
     return buffer
 
 
-# ----------------------------
+
 # THEME
-# ----------------------------
 
 theme = st.sidebar.radio(
     "Theme",
@@ -192,9 +188,7 @@ if theme == "Dark":
     )
 
 
-# ----------------------------
 # HEADER
-# ----------------------------
 
 st.markdown(
     """
@@ -216,9 +210,8 @@ st.write(
 )
 
 
-# ----------------------------
+
 # SIDEBAR INPUTS
-# ----------------------------
 
 st.sidebar.header("Financial Profile")
 
@@ -255,9 +248,8 @@ available_cash_flow = monthly_income - essential_expenses
 st.sidebar.metric("Available Cash Flow", money(available_cash_flow))
 
 
-# ----------------------------
+
 # CARD INPUTS
-# ----------------------------
 
 num_cards = st.number_input(
     "How many credit cards?",
@@ -373,9 +365,7 @@ selected_method = st.radio(
 )
 
 
-# ----------------------------
 # SIMULATION FUNCTION
-# ----------------------------
 
 def simulate_payoff(cards_input, monthly_budget, method):
     cards = cards_input.copy()
@@ -531,9 +521,8 @@ def simulate_payoff(cards_input, monthly_budget, method):
     )
 
 
-# ----------------------------
+
 # MAIN APP LOGIC
-# ----------------------------
 
 if st.button("Analyze Debt Plan", use_container_width=True):
 
@@ -585,9 +574,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
             errors="coerce"
         ).round(2)
 
-        # ----------------------------
+        
         # DEBT OVERVIEW
-        # ----------------------------
 
         st.subheader("Debt Overview")
 
@@ -602,9 +590,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
         else:
             c4.metric("Debt / Monthly Income", "N/A")
 
-        # ----------------------------
+       
         # CARD RISK TABLE
-        # ----------------------------
 
         st.subheader("Card Risk Table")
 
@@ -635,9 +622,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
             use_container_width=True
         )
 
-        # ----------------------------
+
         # STRATEGY COMPARISON
-        # ----------------------------
 
         st.subheader("Strategy Comparison")
 
@@ -667,9 +653,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
         else:
             st.error("None of the strategies fully pay off the debt. Increase your monthly payment budget.")
 
-        # ----------------------------
+       
         # SAVINGS VS MINIMUM
-        # ----------------------------
 
         if avalanche_result["status"] == "Paid off" and minimum_result["status"] == "Paid off":
             time_saved = minimum_result["payoff_months"] - avalanche_result["payoff_months"]
@@ -692,9 +677,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
                 "Minimum-only payments do not reliably pay off the debt in this scenario."
             )
 
-        # ----------------------------
+        
         # ADVISOR NOTES
-        # ----------------------------
 
         st.subheader("Financial Advisor Notes")
 
@@ -765,9 +749,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
         for note in advisor_notes:
             st.info(note)
 
-        # ----------------------------
+        
         # SELECT METHOD DETAILS
-        # ----------------------------
 
         if selected_method == "Avalanche":
             summary = avalanche_summary
@@ -802,9 +785,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
 
             st.write(f"Total interest paid: **{money(result['total_interest'])}**")
 
-        # ----------------------------
+        
         # PAYMENT TABLES
-        # ----------------------------
 
         if len(payments) > 0:
             first_month = payments[
@@ -839,9 +821,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
                 use_container_width=True
             )
 
-        # ----------------------------
+        
         # BALANCE CHARTS
-        # ----------------------------
 
         if len(balances) > 0:
             st.subheader("Balance Over Time")
@@ -905,9 +886,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
 
             st.pyplot(fig2)
 
-        # ----------------------------
+        
         # WHAT IF SCENARIOS
-        # ----------------------------
 
         st.subheader("What If I Pay More Each Month?")
 
@@ -941,9 +921,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
             use_container_width=True
         )
 
-        # ----------------------------
+        
         # PDF REPORT
-        # ----------------------------
 
         if len(payments) > 0:
             first_month_pdf = payments[
@@ -966,9 +945,8 @@ if st.button("Analyze Debt Plan", use_container_width=True):
                 use_container_width=True
             )
 
-        # ----------------------------
+        
         # MONTHLY SUMMARY
-        # ----------------------------
 
         if len(summary) > 0:
             st.subheader("Monthly Summary")
